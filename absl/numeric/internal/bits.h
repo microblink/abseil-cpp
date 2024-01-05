@@ -92,6 +92,7 @@ template <class T>
          static_cast<T>(x >> ((-s) & (std::numeric_limits<T>::digits - 1)));
 }
 
+[[ clang::no_sanitize( "integer" ) ]]
 ABSL_ATTRIBUTE_ALWAYS_INLINE ABSL_INTERNAL_CONSTEXPR_POPCOUNT inline int
 Popcount32(uint32_t x) noexcept {
 #if ABSL_NUMERIC_INTERNAL_HAVE_BUILTIN_OR_GCC(__builtin_popcount)
@@ -105,6 +106,7 @@ Popcount32(uint32_t x) noexcept {
 #endif
 }
 
+[[ clang::no_sanitize( "integer" ) ]]
 ABSL_ATTRIBUTE_ALWAYS_INLINE ABSL_INTERNAL_CONSTEXPR_POPCOUNT inline int
 Popcount64(uint64_t x) noexcept {
 #if ABSL_NUMERIC_INTERNAL_HAVE_BUILTIN_OR_GCC(__builtin_popcountll)
@@ -133,6 +135,7 @@ Popcount(T x) noexcept {
   }
 }
 
+[[ clang::no_sanitize( "integer" ) ]]
 ABSL_ATTRIBUTE_ALWAYS_INLINE ABSL_INTERNAL_CONSTEXPR_CLZ inline int
 CountLeadingZeroes32(uint32_t x) {
 #if ABSL_NUMERIC_INTERNAL_HAVE_BUILTIN_OR_GCC(__builtin_clz)
@@ -169,6 +172,7 @@ CountLeadingZeroes32(uint32_t x) {
 #endif
 }
 
+[[ clang::no_sanitize( "integer" ) ]]
 ABSL_ATTRIBUTE_ALWAYS_INLINE ABSL_INTERNAL_CONSTEXPR_CLZ inline int
 CountLeadingZeroes16(uint16_t x) {
 #if ABSL_HAVE_BUILTIN(__builtin_clzg)
@@ -182,6 +186,7 @@ CountLeadingZeroes16(uint16_t x) {
 #endif
 }
 
+[[ clang::no_sanitize( "integer" ) ]]
 ABSL_ATTRIBUTE_ALWAYS_INLINE ABSL_INTERNAL_CONSTEXPR_CLZ inline int
 CountLeadingZeroes64(uint64_t x) {
 #if ABSL_NUMERIC_INTERNAL_HAVE_BUILTIN_OR_GCC(__builtin_clzll)
@@ -253,6 +258,7 @@ CountLeadingZeroes(T x) {
                     : CountLeadingZeroes64(x));
 }
 
+[[ clang::no_sanitize( "integer" ) ]]
 ABSL_ATTRIBUTE_ALWAYS_INLINE ABSL_INTERNAL_CONSTEXPR_CTZ inline int
 CountTrailingZeroesNonzero32(uint32_t x) {
 #if ABSL_NUMERIC_INTERNAL_HAVE_BUILTIN_OR_GCC(__builtin_ctz)
@@ -275,6 +281,7 @@ CountTrailingZeroesNonzero32(uint32_t x) {
 #endif
 }
 
+[[ clang::no_sanitize( "integer" ) ]]
 ABSL_ATTRIBUTE_ALWAYS_INLINE ABSL_INTERNAL_CONSTEXPR_CTZ inline int
 CountTrailingZeroesNonzero64(uint64_t x) {
 #if ABSL_NUMERIC_INTERNAL_HAVE_BUILTIN_OR_GCC(__builtin_ctzll)
@@ -340,6 +347,7 @@ CountTrailingZeroes(T x) noexcept {
 // want to force it to wraparound so that bit_ceil of an invalid value are not
 // core constant expressions.
 template <class T>
+[[ clang::no_sanitize( "integer" ) ]]
 ABSL_ATTRIBUTE_ALWAYS_INLINE ABSL_INTERNAL_CONSTEXPR_CLZ inline
     typename std::enable_if<std::is_unsigned<T>::value, T>::type
     BitCeilPromotionHelper(T x, T promotion) {

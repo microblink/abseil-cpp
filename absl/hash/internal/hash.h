@@ -1401,6 +1401,7 @@ inline uint64_t MixingHashState::CombineContiguousImpl(
 }
 
 // Overload of MixingHashState::CombineContiguousImpl()
+[[ clang::no_sanitize( "integer" ) ]]
 inline uint64_t MixingHashState::CombineContiguousImpl(
     uint64_t state, const unsigned char* first, size_t len,
     std::integral_constant<int, 8> /* sizeof_size_t */) {
