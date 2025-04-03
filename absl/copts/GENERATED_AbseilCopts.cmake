@@ -220,3 +220,27 @@ list(APPEND ABSL_MSVC_TEST_FLAGS
     "/wd4996"
     "/DNOMINMAX"
 )
+
+list(APPEND ABSL_RANDOM_HWAES_ARM32_FLAGS
+    "-mfpu=neon"
+)
+
+list(APPEND ABSL_RANDOM_HWAES_ARM64_FLAGS
+    "-march=armv8-a+crypto"
+)
+
+list(APPEND ABSL_RANDOM_HWAES_MSVC_X64_FLAGS
+)
+
+
+if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "arm64")
+    list(APPEND ABSL_RANDOM_HWAES_X64_FLAGS
+        "-maes"
+        "-msse4.2"
+    )
+else()
+    list(APPEND ABSL_RANDOM_HWAES_X64_FLAGS
+        "-maes"
+        "-msse4.1"
+    )
+endif()
