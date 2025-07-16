@@ -193,6 +193,9 @@ constexpr bool CheckFastPathSetting(const UnboundConversion& conv) {
   return true;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-constexpr"
+
 constexpr int ParseDigits(char& c, const char*& pos, const char* const end) {
   int digits = c - '0';
   // We do not want to overflow `digits` so we consume at most digits10
@@ -209,6 +212,8 @@ constexpr int ParseDigits(char& c, const char*& pos, const char* const end) {
   }
   return digits;
 }
+
+#pragma clang diagnostic pop
 
 template <bool is_positional>
 constexpr const char* ConsumeConversion(const char* pos, const char* const end,
